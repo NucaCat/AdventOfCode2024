@@ -38,7 +38,7 @@ public sealed class Day1
         var rightList = new List<int>(1000);
         foreach (var line in lines)
         {
-            var splitted = line.Split("   ");
+            var splitted = line.Split("   ", StringSplitOptions.TrimEntries);
             leftList.Add(Convert.ToInt32(splitted[0]));
             rightList.Add(Convert.ToInt32(splitted[1]));
         }
