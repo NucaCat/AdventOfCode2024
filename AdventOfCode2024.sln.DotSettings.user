@@ -2,5 +2,12 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3f72dcb9_002De613_002D4a4e_002Dbf5e_002Dc44e0301cdc5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day1Tests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCount&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCountV2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCountV1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCountV1WithMethodFromV2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCountV2WithTestData&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.SafeReportsCountV2Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day2Tests.DumpUnsafeReportsV2&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
