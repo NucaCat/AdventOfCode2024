@@ -13,22 +13,6 @@ public sealed class Day2
         return safeReportsCount;
     }
 
-    public int SafeReportsCountV1WithMethodFromV2()
-    {
-        var reports = InitialPopulateReports();
-
-        var safeReportsCount = reports.Count(u => IsSafe(u, badLevelsToleranceCount: 0));
-        return safeReportsCount;
-    }
-
-    public int SafeReportsCountV2optimizedButNotWorking(IEnumerable<string>? overrideValues = null)
-    {
-        var reports = InitialPopulateReports(overrideValues);
-
-        var safeReportsCount = reports.Count(u => IsSafe(u, badLevelsToleranceCount: 1));
-        return safeReportsCount;
-    }
-
     public int SafeReportsCountV2BruteForce(IEnumerable<string>? overrideValues = null)
     {
         var reports = InitialPopulateReports(overrideValues);
@@ -48,33 +32,6 @@ public sealed class Day2
         return safeReportsCount;
     }
 
-    public List<Report> DumpSafeReportsCountV2(IEnumerable<string>? overrideValues = null)
-    {
-        var reports = InitialPopulateReports(overrideValues);
-
-        var unsafeReports = reports.Where(u => IsSafe(u, badLevelsToleranceCount: 1)).ToList();
-        return unsafeReports;
-    }
-
-    public List<Report> DumpSafeReportsCountBruteForce(IEnumerable<string>? overrideValues = null)
-    {
-        var reports = InitialPopulateReports(overrideValues);
-
-        var safeReports = reports.Where(u =>
-        {
-            var isSafe = IsSafe(u);
-            if (isSafe)
-                return true;
-
-            return reports.Index().Any(v => IsSafe(new Report(u.Levels
-                .Index()
-                .Where(x => x.Index != v.Index)
-                .Select(x => x.Item)
-                .ToList())));
-        }).ToList();
-        return safeReports;
-    }
-
     private bool IsSafe(Report report)
     {
         var difference = report.Levels.Zip(report.Levels.Skip(1))
@@ -82,43 +39,6 @@ public sealed class Day2
         var isSafe = difference.All(u => u < 0 && Math.Abs(u) is >= _minDifference and <= _maxDifference)
             || difference.All(u => u > 0 && Math.Abs(u) is >= _minDifference and <= _maxDifference);
         return isSafe;
-    }
-
-    private bool IsSafe(Report report, int badLevelsToleranceCount)
-    {
-        return IsSafeAscendingWithBadLevelTolerance(report, badLevelsToleranceCount)
-            || IsSafeDescendingWithBadLevelTolerance(report, badLevelsToleranceCount)
-            // handle for first is incorrect. Try to remove it
-            || IsSafeAscendingWithBadLevelTolerance(new Report(Levels: report.Levels.Skip(1).ToList()), badLevelsToleranceCount - 1)
-            || IsSafeDescendingWithBadLevelTolerance(new Report(Levels: report.Levels.Skip(1).ToList()), badLevelsToleranceCount - 1);
-    }
-
-    private static bool IsSafeAscendingWithBadLevelTolerance(Report report, int badLevelsToleranceCount)
-        => IsSafeWithBadLevelTolerance(report, badLevelsToleranceCount, u => u > 0);
-
-    private static bool IsSafeDescendingWithBadLevelTolerance(Report report, int badLevelsToleranceCount)
-        => IsSafeWithBadLevelTolerance(report, badLevelsToleranceCount, u => u < 0);
-
-    private static bool IsSafeWithBadLevelTolerance(Report report, int badLevelsToleranceCount, Func<int, bool> orderFunc)
-    {
-        var previous = report.Levels.First();
-
-        foreach (var current in report.Levels.Skip(1))
-        {
-            var difference = current - previous;
-            if (orderFunc(difference) && Math.Abs(difference) is >= _minDifference and <= _maxDifference)
-            {
-                previous = current;
-                continue;
-            }
-
-            if (badLevelsToleranceCount <= 0) 
-                return false;
-
-            badLevelsToleranceCount--;
-        }
-
-        return true;
     }
 
     private static List<Report> InitialPopulateReports(IEnumerable<string>? overrideValues = null)
