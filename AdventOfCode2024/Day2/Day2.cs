@@ -21,7 +21,7 @@ public sealed class Day2
         return safeReportsCount;
     }
 
-    public int SafeReportsCountV2(IEnumerable<string>? overrideValues = null)
+    public int SafeReportsCountV2optimizedButNotWorking(IEnumerable<string>? overrideValues = null)
     {
         var reports = InitialPopulateReports(overrideValues);
 
@@ -29,12 +29,50 @@ public sealed class Day2
         return safeReportsCount;
     }
 
-    public List<Report> DumpUnsafeReportsCountV2(IEnumerable<string>? overrideValues = null)
+    public int SafeReportsCountV2BruteForce(IEnumerable<string>? overrideValues = null)
     {
         var reports = InitialPopulateReports(overrideValues);
 
-        var unsafeReports = reports.Where(u => !IsSafe(u, badLevelsToleranceCount: 1)).ToList();
+        var safeReportsCount = reports.Where(u =>
+        {
+            var isSafe = IsSafe(u);
+            if (isSafe)
+                return true;
+
+            return reports.Index().Any(v => IsSafe(new Report(u.Levels
+                .Index()
+                .Where(x => x.Index != v.Index)
+                .Select(x => x.Item)
+                .ToList())));
+        }).Count();
+        return safeReportsCount;
+    }
+
+    public List<Report> DumpSafeReportsCountV2(IEnumerable<string>? overrideValues = null)
+    {
+        var reports = InitialPopulateReports(overrideValues);
+
+        var unsafeReports = reports.Where(u => IsSafe(u, badLevelsToleranceCount: 1)).ToList();
         return unsafeReports;
+    }
+
+    public List<Report> DumpSafeReportsCountBruteForce(IEnumerable<string>? overrideValues = null)
+    {
+        var reports = InitialPopulateReports(overrideValues);
+
+        var safeReports = reports.Where(u =>
+        {
+            var isSafe = IsSafe(u);
+            if (isSafe)
+                return true;
+
+            return reports.Index().Any(v => IsSafe(new Report(u.Levels
+                .Index()
+                .Where(x => x.Index != v.Index)
+                .Select(x => x.Item)
+                .ToList())));
+        }).ToList();
+        return safeReports;
     }
 
     private bool IsSafe(Report report)

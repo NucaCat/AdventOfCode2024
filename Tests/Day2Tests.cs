@@ -14,16 +14,15 @@ public sealed class Day2Tests
         Assert.Equal(486, safeCount);
     }
     [Fact]
-    public void SafeReportsCountV1WithMethodFromV2()
-    {
-        var safeCount = new Day2().SafeReportsCountV1WithMethodFromV2();
-        Assert.Equal(486, safeCount);
-    }
-    [Fact]
     public void SafeReportsCountV2()
     {
-        var safeCount = new Day2().SafeReportsCountV2();
-        // incorrect
-        Assert.Equal(539, safeCount);// -> 540
+        var safeCount = new Day2().SafeReportsCountV2BruteForce();
+        Assert.Equal(540, safeCount);
+    }
+    [Fact]
+    public void SafeReportsCountTricky()
+    {
+        var safeCount = new Day2().SafeReportsCountV2optimizedButNotWorking(new []{"88 87 85 86 85 83 81 78"});
+        Assert.Equal(1, safeCount);
     }
 }
