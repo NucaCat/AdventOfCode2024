@@ -4,7 +4,7 @@ namespace AdventOfCode2024.Day3.Parsers;
 
 internal sealed class NumberParser
 {
-    public static int? TryParseNumber(string line, ref int index)
+    public static int? TryParse(string line, ref int index)
     {
         var number = new List<char>();
         for (;;)

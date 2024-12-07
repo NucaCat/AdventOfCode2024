@@ -2,7 +2,7 @@
 
 internal sealed class MultiplicationParser
 {
-    public static int? TryParseMultiplication(string line, ref int index)
+    public static int? TryParse(string line, ref int index)
     {
         var mul = "mul".AsSpan();
         var multPart = line.SliceWithMove(ref index, mul.Length);
@@ -13,7 +13,7 @@ internal sealed class MultiplicationParser
         if (openBracket is not '(')
             return null;
 
-        var firstNumber = NumberParser.TryParseNumber(line, ref index);
+        var firstNumber = NumberParser.TryParse(line, ref index);
         if (firstNumber is null)
             return null;
 
@@ -21,7 +21,7 @@ internal sealed class MultiplicationParser
         if (colon is not ',')
             return null;
 
-        var secondNumber = NumberParser.TryParseNumber(line, ref index);
+        var secondNumber = NumberParser.TryParse(line, ref index);
         if (secondNumber is null)
             return null;
 
