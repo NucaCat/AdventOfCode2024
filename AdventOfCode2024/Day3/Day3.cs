@@ -1,5 +1,4 @@
-﻿using AdventOfCode2024.Common;
-using AdventOfCode2024.Day3.Parsers;
+﻿using AdventOfCode2024.Day3.Parsers;
 
 namespace AdventOfCode2024.Day3;
 
@@ -53,7 +52,6 @@ public sealed class Day3
             if (character is 'd')
             {
                 var doMutableIndex = index;
-
                 var doParsing = DoParser.TryParse(line, ref doMutableIndex);
                 if (doParsing)
                 {
