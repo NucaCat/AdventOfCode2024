@@ -18,4 +18,21 @@ public static class Extensions
         => source.Count == 0;
     public static bool IsNotEmpty<T>(this List<T> source)
         => !source.IsEmpty();
+    
+    public static int SumOrEmpty(this IEnumerable<int> source)
+        => source.DefaultIfEmpty().Sum();
+    public static decimal SumOrEmpty(this IEnumerable<decimal> source)
+        => source.DefaultIfEmpty().Sum();
+    public static double SumOrEmpty(this IEnumerable<double> source)
+        => source.DefaultIfEmpty().Sum();
+    public static float SumOrEmpty(this IEnumerable<float> source)
+        => source.DefaultIfEmpty().Sum();
+    
+    public static ReadOnlySpan<char> PartialSlice(this ReadOnlySpan<char> rowSpan, string searchValue, int index)
+    {
+        var length = index + searchValue.Length >= rowSpan.Length
+            ? rowSpan.Length - index
+            : searchValue.Length;
+        return rowSpan.Slice(index, length);
+    }
 }

@@ -1,4 +1,6 @@
-﻿using AdventOfCode2024.Day3.Parsers;
+﻿using AdventOfCode2024.Common;
+using AdventOfCode2024.Day3.Parsers;
+using AdventOfCode2024.Day4;
 
 namespace AdventOfCode2024.Day3;
 
@@ -7,7 +9,7 @@ public sealed class Day3
     public int SumOfCorrectMultiplications(IEnumerable<string>? overrideValues = null)
     {
         var lines = overrideValues ?? File.ReadLines("Day3/input.txt");
-        var totalSum = lines.Select(SumForLine).DefaultIfEmpty().Sum();
+        var totalSum = lines.Select(SumForLine).SumOrEmpty();
         return totalSum;
     }
     public int SumOfCorrectMultiplicationsWithEnabling(IEnumerable<string>? overrideValues = null)
