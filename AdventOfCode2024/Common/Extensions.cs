@@ -6,6 +6,10 @@ public static class Extensions
         => source.OrderBy(u => u);
     public static string JoinToString<T>(this IEnumerable<T> source, string separator = " ")
         => string.Join(separator, source);
+    public static IEnumerable<T> SelectNotNull<T>(this IEnumerable<T?> source) where T : struct
+        => source.Where(u => u.HasValue).Select(u => u!.Value);
+    public static IEnumerable<T> SelectNotNull<T>(this IEnumerable<T?> source) where T : class
+        => source.Where(u => u is not null)!;
     public static bool IsEmpty<T>(this IEnumerable<T> source)
         => !source.IsNotEmpty();
     public static bool IsNotEmpty<T>(this IEnumerable<T> source)
@@ -18,6 +22,8 @@ public static class Extensions
         => source.Count == 0;
     public static bool IsNotEmpty<T>(this List<T> source)
         => !source.IsEmpty();
+    public static IEnumerable<T> SkipOrEmpty<T>(this IEnumerable<T> source, int count)
+        => count < 0 ? Enumerable.Empty<T>() : source.Skip(count);
     
     public static int SumOrEmpty(this IEnumerable<int> source)
         => source.DefaultIfEmpty().Sum();
