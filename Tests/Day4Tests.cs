@@ -10,10 +10,16 @@ namespace Tests;
 public sealed class Day4Tests
 {
     [Fact]
-    public void SumOfCorrectMultiplications()
+    public void CountInAllDirections()
     {
         var countOfXmases = new Day4().CountInAllDirections();
         Assert.Equal(2434, countOfXmases);
+    }
+    [Fact]
+    public void CountInXShape()
+    {
+        var countOfXmases = new Day4().CountInXShape();
+        Assert.Equal(1835, countOfXmases);
     }
     [Theory]
     [InlineData("PXMASPPPSAMXP", 2)]
@@ -103,6 +109,25 @@ public sealed class Day4Tests
     public void MultipleLineCount(string[] values, int result)
     {
         var countOfXmases = new Day4().CountInAllDirections(values);
+        Assert.Equal(result, countOfXmases);
+    }
+    [Theory]
+    [InlineData(new []
+    {
+        "MMMSXXMASM",
+        "MSAMXMSMSA",
+        "AMXSXMAAMM",
+        "MSAMASMSMX",
+        "XMASAMXAMM",
+        "XXAMMXXAMA",
+        "SMSMSASXSS",
+        "SAXAMASAAA",
+        "MAMMMXMMMM",
+        "MXMXAXMASX",
+    }, 9)]
+    public void MultipleLineCountInXShape(string[] values, int result)
+    {
+        var countOfXmases = new Day4().CountInXShape(values);
         Assert.Equal(result, countOfXmases);
     }
 }

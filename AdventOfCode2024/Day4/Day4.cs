@@ -1,26 +1,38 @@
-﻿using AdventOfCode2024.Common;
+﻿using System.Buffers;
+using AdventOfCode2024.Common;
 
 namespace AdventOfCode2024.Day4;
 
 public sealed class Day4
 {
-    public const string SearchValue = "XMAS";
-    public const string ReverseSearchValue = "SAMX";
+    private const string _xmasSearchValue = "XMAS";
+    private const string _xmasReverseSearchValue = "SAMX";
+
+    private readonly string[] _masSearchValues = ["MAS", "SAM"]; 
 
     public int CountInAllDirections(IEnumerable<string>? overrideValues = null)
     {
         var values = InitialParse(overrideValues);
         
-        var countInRows = CountInRows(values, SearchValue);
-        var reverseCountInRows = CountInRows(values, ReverseSearchValue);
-        var countInDiagonals = CountInDiagonals(values, SearchValue);
-        var reverseCountInDiagonals = CountInDiagonals(values, ReverseSearchValue);
-        var countInColumns = CountInColumns(values, SearchValue);
-        var reverseCountInColumns = CountInColumns(values, ReverseSearchValue);
+        var countInRows = CountInRows(values, _xmasSearchValue);
+        var reverseCountInRows = CountInRows(values, _xmasReverseSearchValue);
+        var countInDiagonals = CountInDiagonals(values, _xmasSearchValue);
+        var reverseCountInDiagonals = CountInDiagonals(values, _xmasReverseSearchValue);
+        var countInColumns = CountInColumns(values, _xmasSearchValue);
+        var reverseCountInColumns = CountInColumns(values, _xmasReverseSearchValue);
 
         return countInRows + reverseCountInRows 
             + countInDiagonals + reverseCountInDiagonals 
             + countInColumns + reverseCountInColumns;
+    }
+
+    public int CountInXShape(IEnumerable<string>? overrideValues = null)
+    {
+        var values = InitialParse(overrideValues);
+
+        var countInXes = CountInXes(values);
+
+        return countInXes;
     }
 
     private int CountInColumns(List<string> text, string searchValue)
@@ -38,6 +50,23 @@ public sealed class Day4
             {
                 var diagonal = GetDiagonalFromWithShift(text, lineIndex, indexInLine, searchValue.Length, shift);
                 if (diagonal.AsSpan().SequenceEqual(searchValue))
+                    count++;
+            }
+        }
+        return count;
+    }
+    private int CountInXes(List<string> text)
+    {
+        var xLength = _masSearchValues[0].Length;
+        
+        var count = 0;
+        foreach (var (lineIndex, line) in text.Index())
+        {
+            foreach (var (indexInLine, _) in line.Index())
+            {
+                var forwardDiagonal = GetDiagonalFromWithShift(text, lineIndex, indexInLine, xLength, incrementalShift: 1);
+                var backDiagonal = GetDiagonalFromWithShift(text, lineIndex, indexInLine + 2, xLength, incrementalShift: -1);
+                if (_masSearchValues.Contains(new string(forwardDiagonal)) && _masSearchValues.Contains(new string(backDiagonal)))
                     count++;
             }
         }

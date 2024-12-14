@@ -23,7 +23,7 @@ public static class Extensions
     public static bool IsNotEmpty<T>(this List<T> source)
         => !source.IsEmpty();
     public static IEnumerable<T> SkipOrEmpty<T>(this IEnumerable<T> source, int count)
-        => count < 0 ? Enumerable.Empty<T>() : source.Skip(count);
+        => count < 0 ? [] : source.Skip(count);
     
     public static int SumOrEmpty(this IEnumerable<int> source)
         => source.DefaultIfEmpty().Sum();
