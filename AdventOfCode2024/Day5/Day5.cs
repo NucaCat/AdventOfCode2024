@@ -42,7 +42,6 @@ public sealed class Day5
         foreach (var page in update)
         {
             var beforeRule = rules.Before.GetValueOrDefault(page) ?? Enumerable.Empty<int>();
-            var afterRule = rules.After.GetValueOrDefault(page) ?? Enumerable.Empty<int>();
 
             var indexBefore = list.Index().Where(u => beforeRule.Contains(u.Item)).Select(u => u.Index).DefaultIfEmpty(-1).Min();
             if (indexBefore != -1)
@@ -50,7 +49,8 @@ public sealed class Day5
                 list.Insert(indexBefore, page);
                 continue;
             }
-            
+
+            var afterRule = rules.After.GetValueOrDefault(page) ?? Enumerable.Empty<int>();
             var indexAfter = list.Index().Where(u => afterRule.Contains(u.Item)).Select(u => u.Index + 1).DefaultIfEmpty(0).Max();
             list.Insert(indexAfter, page);
         }
