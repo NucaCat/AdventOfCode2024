@@ -10,16 +10,20 @@ public static class Extensions
         => source.Where(u => u.HasValue).Select(u => u!.Value);
     public static IEnumerable<T> SelectNotNull<T>(this IEnumerable<T?> source) where T : class
         => source.Where(u => u is not null)!;
+    public static bool NotContains<T>(this IEnumerable<T> source, T value)
+        => !source.Contains(value);
+    public static bool NotContains<T>(this List<T> source, T value)
+        => !source.Contains(value);
     public static bool IsEmpty<T>(this IEnumerable<T> source)
         => !source.IsNotEmpty();
     public static bool IsNotEmpty<T>(this IEnumerable<T> source)
         => source.Any();
-    public static bool IsEmpty<T>(this T[] source)
-        => source.Length == 0;
+    public static bool IsEmpty<T>(this T[]? source)
+        => source is null || source.Length == 0;
     public static bool IsNotEmpty<T>(this T[] source)
         => !source.IsEmpty();
-    public static bool IsEmpty<T>(this List<T> source)
-        => source.Count == 0;
+    public static bool IsEmpty<T>(this List<T>? source)
+        => source is null || source.Count == 0;
     public static bool IsNotEmpty<T>(this List<T> source)
         => !source.IsEmpty();
     public static IEnumerable<T> SkipOrEmpty<T>(this IEnumerable<T> source, int count)
@@ -33,6 +37,10 @@ public static class Extensions
         => source.DefaultIfEmpty().Sum();
     public static float SumOrEmpty(this IEnumerable<float> source)
         => source.DefaultIfEmpty().Sum();
+    public static bool IsNullOrWhiteSpace(this string str)
+        => string.IsNullOrWhiteSpace(str);
+    public static bool IsNotNullOrWhiteSpace(this string str)
+        => !string.IsNullOrWhiteSpace(str);
     
     public static ReadOnlySpan<char> PartialSlice(this ReadOnlySpan<char> rowSpan, string searchValue, int index)
     {
