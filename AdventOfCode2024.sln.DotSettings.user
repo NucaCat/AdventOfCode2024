@@ -24,5 +24,7 @@
     &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day5Tests.SumOfMiddlePartOfCorrectUpdates&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day5Tests.TestCorrect&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day5Tests.SumOfMiddlePartOfCorrectedIncorrectUpdates&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day6Tests.TestCorrect&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::3B4296FB-6F14-44EA-8FD4-B0AE15CBF42E::net9.0::Tests.Day6Tests.SumOfMiddlePartOfCorrectUpdates&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
